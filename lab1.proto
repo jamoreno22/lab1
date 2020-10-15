@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option go_package = "github.com/jamoreno22/lab1";
+
+package lab1;
+
+import "google/protobuf/timestamp.proto";
+
+message Paquete{
+    string id = 1;
+    string tipo = 2;
+    int32 valor = 3;
+    string tienda = 4;
+    string destino = 5;
+    bool prioritario = 6;
+}
+
+message Peticion{
+    string envio = 1;
+}
+
+message Estado{
+    string estado = 1;
+}
+
+message EstadoCamion{
+    string id = 1;
+    string tipo = 2;
+    int32 valor = 3;
+    string origen = 4;
+    string destino = 5;
+    int32 intentos = 6;
+    google.protobuf.Timestamp fecha = 7;
+}
+
+service EnvioPaquetes{
+    rpc GetList(Peticion) returns (Paquete) {}
+    rpc Seguimiento(Peticion) returns (Paquete) {}
+    rpc HistorialCamion(Peticion) returns (EstadoCamion) {}
+}
